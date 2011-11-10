@@ -7,6 +7,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.dependency.resolution = {
 
     def seleniumVersion = "2.8.0"
+    def gebVersion = "0.6.0"
 
     // inherit Grails' default dependencies
     inherits("global") {
@@ -23,13 +24,10 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenCentral()
 
-        // uncomment these to enable remote dependency resolution from public Maven repositories
-        mavenCentral()
-        mavenLocal()
         mavenRepo "http://snapshots.repository.codehaus.org"
+        mavenRepo "http://m2repo.spockframework.org/snapshots"
+        mavenRepo "http://m2repo.spockframework.org/releases"
         mavenRepo "http://repository.codehaus.org"
-        mavenRepo "http://download.java.net/maven/2/"
-        mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -39,6 +37,8 @@ grails.project.dependency.resolution = {
         }
         test("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
         test("org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion")
+
+        test "org.codehaus.geb:geb-spock:$gebVersion"
     }
     plugins {
         compile ":hibernate:$grailsVersion"
@@ -50,7 +50,8 @@ grails.project.dependency.resolution = {
 
         test ":spock:0.6-SNAPSHOT"
         test ":code-coverage:1.2.4"
-        test ":geb:0.6.1"
+        test ":geb:$gebVersion"
+        test ":functional-test-development:0.2"
     }
 }
 
